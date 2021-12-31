@@ -3,11 +3,16 @@ package com.example.xogame;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MainScreen {
 
@@ -112,6 +117,29 @@ public class MainScreen {
 
     @FXML
     void manageTheGameBoard(MouseEvent event) {
+
+        // get the id of the clicked button
+        Pane pane = (Pane) event.getSource();
+        //String paneIdName = pane.getId();
+
+
+        // new Image(url)
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("C:\\Users\\ahmad\\IdeaProjects\\XOGame\\src\\main\\resources\\Ximage.jpg"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
+        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
+        // new BackgroundImage(image, repeatX, repeatY, position, size)
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        // new Background(images...)
+        Background background = new Background(backgroundImage);
+
+        pane.setBackground(background);
+
+
 
     }
 
