@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.WinningScreen">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="200.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations" textAlignment="CENTER" wrappingWidth="570.0">
+                           <font>
+                              <Font name="Comic Sans MS" size="36.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </top>
+               <bottom>
+                  <GridPane prefHeight="150.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="190.0" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="190.0">
+                                 <children>
+                                    <JFXButton fx:id="exit" onMouseClicked="#manageExit" prefHeight="33.0" prefWidth="190.0" text="Exit">
+                                       <font>
+                                          <Font name="Comic Sans MS Bold" size="17.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="200.0" layoutY="10.0" prefHeight="200.0" prefWidth="190.0" />
+                           </children>
+                        </HBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="142.5" GridPane.rowIndex="1">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="114.0" />
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="171.0">
+                                       <children>
+                                          <JFXButton fx:id="playAgain" minHeight="33.0" onMouseClicked="#managePlayAgain" prefHeight="41.0" prefWidth="146.0" styleClass="E:\application" text="Play Again">
+                                             <font>
+                                                <Font name="Comic Sans MS" size="17.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="124.0" layoutY="10.0" prefHeight="200.0" prefWidth="25.0" />
+                                    <VBox layoutX="295.0" layoutY="10.0" prefHeight="200.0" prefWidth="146.0">
+                                       <children>
+                                          <JFXButton fx:id="backToHome" minHeight="33.0" onMouseClicked="#manageBackToHome" prefHeight="41.0" prefWidth="146.0" text="Back to home">
+                                             <font>
+                                                <Font name="Comic Sans MS" size="17.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="114.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="142.5" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="142.5">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your Score" wrappingWidth="142.5">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="17.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="153.0" layoutY="10.0" prefHeight="200.0" prefWidth="71.25" />
+                              <VBox layoutX="296.0" layoutY="10.0" prefHeight="200.0" prefWidth="71.25">
+                                 <children>
+                                    <Label fx:id="score" prefWidth="71.25" text="100" textAlignment="RIGHT">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </bottom>
+            </BorderPane>
+         </content>
+      </ScrollPane>
+   </children>
+</fx:root>
