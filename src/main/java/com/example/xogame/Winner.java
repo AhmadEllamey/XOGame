@@ -1,14 +1,18 @@
 package com.example.xogame;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+//import javafx.scene.media.MediaView;
 
-public class WinningScreen {
+public class Winner {
 
     @FXML
-    private JFXButton backToHome;
+    private JFXButton backHome;
+
+    /*@FXML
+    private MediaView celebrationMedia;*/
 
     @FXML
     private JFXButton exit;
@@ -20,17 +24,17 @@ public class WinningScreen {
     private Label score;
 
     @FXML
-    void manageBackToHome(MouseEvent event) {
+    void handleBackToHome(ActionEvent event) {
 
     }
 
     @FXML
-    void manageExit(MouseEvent event) {
+    void handleExit(ActionEvent event) {
 
     }
 
     @FXML
-    void managePlayAgain(MouseEvent event) {
+    void handlePlayAgain(ActionEvent event) {
 
     }
 

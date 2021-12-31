@@ -126,7 +126,7 @@ public class MainScreen {
         // new Image(url)
         Image image = null;
         try {
-            image = new Image(new FileInputStream("C:\\Users\\ahmad\\IdeaProjects\\XOGame\\src\\main\\resources\\Ximage.jpg"));
+            image = new Image(new FileInputStream("E:\\Courses\\JAVA\\PROJECT\\XOGame\\src\\main\\resources\\Ximage.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
