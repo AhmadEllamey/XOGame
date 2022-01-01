@@ -6,10 +6,20 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class ProfileController {
+
+
     @FXML
-    private JFXPasswordField passwordTxt;
+    private ImageView imageView;
+
+    @FXML
+    private JFXTextField userNameText;
+
+    @FXML
+    private JFXTextField mailText;
 
     @FXML
     private JFXTextField phoneTxt;
@@ -21,14 +31,17 @@ public class ProfileController {
     private Label totalScoreTxt;
 
     @FXML
-    private JFXButton updatebtn;
+    private JFXPasswordField passwordTxt;
 
     @FXML
-    private JFXTextField userNameTxt;
+    private JFXButton updateBtn;
 
     @FXML
-    void updatebtnClick(ActionEvent event) {
+    void manageImageView(MouseEvent event) {
+    }
 
+    @FXML
+    void manageUpdateButton(ActionEvent event) {
     }
 
 }

@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.RegistrationController">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.RegistrationController">
    <children>
-      <ScrollPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane cache="true" cacheHint="SCALE" fitToHeight="true" fitToWidth="true" layoutX="11.0" layoutY="7.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="585.0" prefWidth="577.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <VBox alignment="TOP_CENTER" prefHeight="598.0" prefWidth="600.0">
                <children>
@@ -85,14 +84,12 @@
                   </JFXButton>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
                      <children>
-                        <Label fx:id="loginLabel" onMouseClicked="#manageLoginLabel" prefHeight="20.0" prefWidth="245.0" text="Login">
-                           <graphic>
-                              <Label prefHeight="20.0" prefWidth="171.0" text="Already have an account?">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
+                        <Label prefHeight="20.0" prefWidth="171.0" text="Already have an account?">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loginLabel" onMouseClicked="#manageLoginLabel" text="Login">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -104,4 +101,7 @@
          </content>
       </ScrollPane>
    </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
 </AnchorPane>
