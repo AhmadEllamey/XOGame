@@ -1,0 +1,24 @@
+
+
+
+
+/* this is how you can use a css file and style your project */
+/* ToDo Welcome TO The CSS Way  */
+
+
+
+.button {
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: black;
+ }
+
+
+
+
+
+
+
+
+
+
