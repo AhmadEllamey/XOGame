@@ -8,7 +8,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.input.MouseEvent;
 
-public class HelloController {
+public class LoginController {
 
     @FXML
     private JFXTextField UsernameText;

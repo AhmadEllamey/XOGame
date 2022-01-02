@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 //import javafx.scene.media.MediaView;
 
-public class Winner {
+public class GameOverController {
 
     @FXML
     private JFXButton backHome;

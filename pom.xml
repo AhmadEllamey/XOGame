@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.xogame/com.example.xogame.HelloApplication</mainClass>
+                            <mainClass>com.example.xogame/com.example.xogame.TheMainClass</mainClass>
                         </configuration>
                     </execution>
                 </executions>

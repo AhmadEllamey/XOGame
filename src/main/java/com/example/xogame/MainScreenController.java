@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class MainScreen {
+public class MainScreenController {
 
 
     @FXML
@@ -42,6 +42,13 @@ public class MainScreen {
 
     @FXML
     private Label playerTwoScoreLabel;
+
+    @FXML
+    private JFXButton requestButton;
+
+    @FXML
+    private JFXButton replayButton;
+
 
     @FXML
     private Pane P_0_0;
@@ -106,7 +113,6 @@ public class MainScreen {
     void manageRecordGameButton(ActionEvent event) {
 
 
-
     }
 
     @FXML
@@ -142,9 +148,15 @@ public class MainScreen {
 
     }
 
+    @FXML
+    void manageRequestButton(ActionEvent event) {
 
+    }
 
+    @FXML
+    void manageReplayButton(ActionEvent event) {
 
+    }
 
 
 
