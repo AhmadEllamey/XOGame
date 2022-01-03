@@ -12,6 +12,8 @@ import javafx.scene.input.MouseEvent;
 public class ProfileController {
 
 
+    private boolean txtFieldFlag=false;
+
     @FXML
     private ImageView imageView;
 
@@ -36,12 +38,16 @@ public class ProfileController {
     @FXML
     private JFXButton updateBtn;
 
+
+
+
     @FXML
     void manageImageView(MouseEvent event) {
     }
 
     @FXML
     void manageUpdateButton(ActionEvent event) {
+
     }
 
 }
