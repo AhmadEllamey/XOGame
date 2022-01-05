@@ -1,0 +1,4 @@
+.bodybg {
+    -fx-background-image:url('E:\Courses\JAVA\PROJECT\TIC-TOE\XOGame\src\main\resources\background.jpg');
+	-fx-background-size: 100% 100%; 
+}
