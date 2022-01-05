@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="400.0" prefHeight="468.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.ProfileController">
+   <children>
+      <ScrollPane cache="true" cacheHint="SCALE" fitToHeight="true" fitToWidth="true" layoutX="11.0" layoutY="10.0" prefHeight="450.0" prefWidth="378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox alignment="TOP_CENTER" cache="true" cacheHint="SCALE" prefHeight="448.0" prefWidth="379.0">
+               <children>
+                  <ImageView fx:id="imageView" cache="true" cacheHint="SCALE" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#manageImageView" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../imagex.png" />
+                     </image></ImageView>
+                  <HBox alignment="CENTER" cache="true" cacheHint="SCALE" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label cache="true" prefHeight="47.0" prefWidth="101.0" text="UserName">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="userNameText" cache="true" disable="true" prefHeight="40.0" prefWidth="236.0" promptText="Username">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" cache="true" layoutX="10.0" layoutY="160.0" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="101.0" text="Email">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="mailText" cache="true" disable="true" prefHeight="40.0" prefWidth="236.0" promptText="Mail">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></JFXTextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" cache="true" cacheHint="SCALE" layoutX="10.0" layoutY="203.0" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="101.0" text="Phone">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="phoneTxt" cache="true" disable="true" prefHeight="42.0" prefWidth="236.0" promptText="Phone">
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></JFXTextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" cache="true" cacheHint="SCALE" layoutX="10.0" layoutY="246.0" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="101.0" text="Total Games">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="totalGameTxt" cache="true" disable="true" prefHeight="43.0" prefWidth="253.0" text="18">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" cache="true" cacheHint="SCALE" layoutX="10.0" layoutY="289.0" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="101.0" text="Total Score">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="totalScoreTxt" cache="true" disable="true" prefHeight="43.0" prefWidth="256.0" text="1000">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding></Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="332.0" prefHeight="43.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="47.0" prefWidth="101.0" text="Password">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXPasswordField fx:id="passwordTxt" cache="true" disable="true" prefHeight="43.0" prefWidth="244.0" promptText="Password">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </JFXPasswordField>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="332.0" prefHeight="8.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <JFXButton fx:id="updateBtn" buttonType="RAISED" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="160.0" onAction="#manageUpdateButton" prefHeight="45.0" prefWidth="160.0" ripplerFill="WHITE" stylesheets="@application.css" text="Update">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets bottom="15.0" top="15.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+</AnchorPane>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.PlayingOption">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="190.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="withComputerOption" alignment="CENTER" buttonType="RAISED" onMouseClicked="#playWithComputer" prefWidth="320.0" ripplerFill="#9a9595" stylesheets="@application.css" text="Play With Computer" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="withFriendOption" alignment="CENTER" buttonType="RAISED" onMouseClicked="#playWithFriend" prefWidth="320.0" ripplerFill="#9a9595" stylesheets="@application.css" text="Play With a Friend" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="onlineOption" alignment="CENTER" buttonType="RAISED" onMouseClicked="#playOnline" prefWidth="320.0" ripplerFill="#9a9595" stylesheets="@application.css" text="Play Online" textAlignment="CENTER">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
