@@ -9,6 +9,11 @@ import java.io.IOException;
 
 public class TheMainClass extends Application {
 
+    private static Stage mainStage ;
+
+    public static Stage getMainStage() {
+        return mainStage;
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -16,6 +21,7 @@ public class TheMainClass extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 500);
         stage.setTitle("XO Game Login !");
         stage.setScene(scene);
+        mainStage = stage ;
         stage.show();
     }
 

@@ -47,7 +47,6 @@ public class ProfileController {
 
     @FXML
     void manageUpdateButton(ActionEvent event) {
-
     }
 
 }
