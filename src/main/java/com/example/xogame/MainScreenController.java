@@ -561,7 +561,20 @@ public class MainScreenController implements Initializable{
     void manageViewRecordsButton(ActionEvent event) {
 
     }
+    @FXML
+    void detUserInfo(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(TheMainClass.class.getResource("ProfileScreen.fxml"));
+        try {
+            Parent mainCallWindowFXML = loader.load();
+            TheMainClass.getMainStage().setTitle("profile Screen !");
+            TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,450,500));
+            TheMainClass.getMainStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+
+    }
 
 
 }

@@ -194,7 +194,7 @@
                               <Image url="@../../../imagex.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="usernameLabel" text="Username Label">
+                        <Label fx:id="usernameLabel" onMouseClicked="#detUserInfo" text="Username Label">
                            <font>
                               <Font name="System Bold Italic" size="18.0" />
                            </font>
