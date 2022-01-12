@@ -7,15 +7,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 
-public class CommunicationDAO {
-    private static CommunicationDAO daoInstance;
+public class ClientHandler {
+    private static ClientHandler clientHandler;
     private Socket socket;
     private DataInputStream dataInputStream;
     private PrintStream printStream;
     private String str;
 
 
-    private CommunicationDAO() {
+
+    private ClientHandler(){
         try {
             socket = new Socket("127.0.0.1", 5005);
             dataInputStream = new DataInputStream(socket.getInputStream());
@@ -23,35 +24,39 @@ public class CommunicationDAO {
         } catch (IOException e) {
             System.out.println("Server off");
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        str = dataInputStream.readLine();
+                        switch (str){
+                            case "Saved Successfully":
+                                SaveGame.serverReply();
 
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        closeConnection();
+                        Platform.exit();
+                        System.exit(0);
+
+                    }
+                }
+
+            }
+        }).start();
     }
 
-    public static CommunicationDAO getDaoInstance() {
-        if (daoInstance == null) {
-            daoInstance = new CommunicationDAO();
+    public static ClientHandler getClientHandler() {
+        if (clientHandler == null) {
+            clientHandler = new ClientHandler();
         }
-        return daoInstance;
+        return clientHandler;
     }
 
     public void sendData(String data){
         printStream.println(data);
-    }
-    public String getData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    str = dataInputStream.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    closeConnection();
-                    Platform.exit();
-                    System.exit(0);
-
-                }
-            }
-        }).start();
-        return str;
     }
     public void closeConnection(){
 
