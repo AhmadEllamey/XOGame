@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
+import org.json.*;
 
 public class ClientHandler {
     private static ClientHandler clientHandler;
@@ -30,7 +31,9 @@ public class ClientHandler {
                 while(true){
                     try {
                         str = dataInputStream.readLine();
-                        switch (str){
+                        JSONObject jsonObject= new JSONObject(str);
+                        String functionMode = jsonObject.getString("FunctionMode");
+                        switch (functionMode){
                             case "Saved Successfully":
                                 SaveGame.serverReply();
 
