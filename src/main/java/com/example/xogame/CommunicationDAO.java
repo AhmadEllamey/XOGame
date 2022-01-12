@@ -23,28 +23,6 @@ public class CommunicationDAO {
         } catch (IOException e) {
             System.out.println("Server off");
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    try {
-                        str = dataInputStream.readLine();
-                        switch (str){
-                            case "Saved Successfully":
-                                Platform.runLater(() -> GameRecord.serverReply());
-
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        closeConnection();
-                        Platform.exit();
-                        System.exit(0);
-
-                    }
-                }
-
-            }
-        }).start();
 
     }
 
@@ -58,7 +36,23 @@ public class CommunicationDAO {
     public void sendData(String data){
         printStream.println(data);
     }
+    public String getData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    str = dataInputStream.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    closeConnection();
+                    Platform.exit();
+                    System.exit(0);
 
+                }
+            }
+        }).start();
+        return str;
+    }
     public void closeConnection(){
 
         try {
