@@ -20,31 +20,8 @@ public class GameRecord {
     static Collection turns;
     JSONObject myjObj=new JSONObject();
 
-    Socket clientSocket;
-    PrintStream ps;
-    DataInputStream dis;
     public GameRecord(){
 
-        Thread th = new Thread(){
-            @Override
-            public void run(){
-                try {
-                    String serverReply = dis.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        try {
-            clientSocket = new Socket("127.0.0.1",5005);
-            dis = new DataInputStream(clientSocket.getInputStream());
-            ps = new PrintStream(clientSocket.getOutputStream());
-            th.start();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void storeGame(JSONObject jsonObject){
