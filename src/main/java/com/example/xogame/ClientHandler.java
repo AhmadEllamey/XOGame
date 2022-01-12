@@ -34,8 +34,7 @@ public class ClientHandler {
                         JSONObject jsonObject= new JSONObject(str);
                         String functionMode = jsonObject.getString("FunctionMode");
                         switch (functionMode){
-                            case "Saved Successfully":
-                                SaveGame.serverReply();
+                            //handle your case here
 
                         }
                     } catch (IOException e) {
