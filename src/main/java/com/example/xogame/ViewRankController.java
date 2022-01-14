@@ -7,35 +7,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ViewRankController implements Initializable {
 
-    static String dataFromServer;
-    //private ClientHandler clientHandler;
-    String dataToSever;
-
-
     @FXML
     private JFXButton backBtn;
 
     @FXML
-    private JFXListView<?> playersRankList;
+    private JFXListView<String> playersRankList;
+
+
+    public static Handler handlerForVRC ;
+
+    public static int classFlagVRC = 0 ;
+
+    private static ViewRankController viewRankController ;
+
+    public static ViewRankController getTheOnlineObject(){
+        return viewRankController;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //clientHandler=ClientHandler.getClientHandler();
-        dataToSever = "{\"FunctionMode\": \"" + "viewRank" + "\"}";
-        //clientHandler.sendData(dataToSever);
-        System.out.println(dataFromServer);
-        //JSONObject result=new JSONObject(dataFromServer);
+        handlerForVRC = Handler.getTheObject();
+        String dataToSever = "{\"FunctionMode\": \"getTheLeaderBoardPlayers\",\"From\": \"Null\",\"To\": \"Null\"}";
+        handlerForVRC.getPs().println(dataToSever);
+        viewRankController = this ;
+        classFlagVRC = 1 ;
     }
     @FXML
     void manageBackImg(MouseEvent event) {
@@ -51,9 +53,9 @@ public class ViewRankController implements Initializable {
 
     }
 
-    public static String ListenToServerData(String str){
-        dataFromServer=str;
-        return null;
+    public void whenTheServerAnswer(String msg){
+        // ToDo write your code here
+        // the msg will be a json array started looping from one .
     }
 
 

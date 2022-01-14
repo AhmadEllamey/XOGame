@@ -117,10 +117,9 @@ public class OnlineGameScreenController implements Initializable {
     String playerAvatar ;
     String playerTurn;
     Stage recordedGame = new Stage();
-    Stage profileGame = new Stage();
-    Thread thread ;
-    Thread MainThread ;
 
+
+    public static int classFlag = 0 ;
 
     public void setOpponentIP(String opponentIP) {
         this.opponentIP = opponentIP;
@@ -129,25 +128,17 @@ public class OnlineGameScreenController implements Initializable {
     public JFXButton getExitButton() {
         return exitButton;
     }
+    public static Handler handler ;
 
-    Handler handler ;
+    private static OnlineGameScreenController onlineGameScreenController ;
 
+    public static OnlineGameScreenController getTheOnlineObject(){
+        return onlineGameScreenController;
+    }
 
 
     // function is ready fpr use .
-    public boolean isJSONValid(String test) {
-        try {
-            new JSONObject(test);
-        }catch (Exception e){
-            try{
-                new JSONArray(test);
-                return false;
-            }catch (Exception ee){
-                System.out.println("error but return true");
-            }
-        }
-        return true;
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -171,8 +162,9 @@ public class OnlineGameScreenController implements Initializable {
             if (result.get() == ButtonType.OK){
                 // ... user chose OK
                 // close the Stage
-                Stage stage = (Stage) exitButton.getScene().getWindow();
-                stage.close();
+
+
+                TheMainClass.getMainStage().close();
                 closeTheConnection();
                 System.exit(0);
                 Platform.exit();
@@ -183,134 +175,7 @@ public class OnlineGameScreenController implements Initializable {
         });
 
 
-        MainThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    System.out.println("again");
-                    try{
-                        String incomingLine = handler.getDis().readLine();
-                        System.out.println(incomingLine);
-                        JSONArray jsonArray ;
-                        JSONObject jsonObject ;
-                        String functionMode ;
-                        System.out.println(incomingLine);
-                        if(isJSONValid(incomingLine)){
-                            jsonObject = new JSONObject(incomingLine);
-                            functionMode = jsonObject.getString("FunctionMode");
 
-                        }else {
-                            jsonArray = new JSONArray(incomingLine);
-                            functionMode = jsonArray.getJSONObject(0).getString("FunctionMode");
-                        }
-                        System.out.println(functionMode);
-                        switch (functionMode) {
-                            case "TheOnlinePlayers" -> Platform.runLater(()->loadPlayerInfo(incomingLine));
-
-                            case "sendAnswerToPlayRequest" ->
-                                    Platform.runLater(()->{
-                                        System.out.println(incomingLine);
-                                        JSONObject jsonObjectx = new JSONObject(incomingLine);
-                                        System.out.println(jsonObjectx.getString("Answer"));
-                                        if (jsonObjectx.getString("Answer").equals("Yes")) {
-                                            AcceptTheRequest(jsonObjectx);
-                                        }else {
-                                            opponentIP = null;
-                                        }
-                                    });
-
-                            case "sendPlayRequest" ->  Platform.runLater(()->showAPlayingRequest(incomingLine));
-
-                            case "sendUpdateTheGameBoardRequest" -> Platform.runLater(()->{
-                                UpdateTheGameBoard(incomingLine);
-                            });
-
-                            case "endGameRequestWithSurrenderRequest" -> Platform.runLater(()->IWon());
-
-
-                            case "sendIWonRequest" -> Platform.runLater(()->ILost());
-
-                            case "sendRematchRequest" -> Platform.runLater(()->{
-                                showARematchRequest(incomingLine);
-                            });
-
-                            case "getRematchAnswerRequest" -> Platform.runLater(()->{
-                                System.out.println(incomingLine);
-                                JSONObject jsonObjectx = new JSONObject(incomingLine);
-                                System.out.println(jsonObjectx.getString("Answer"));
-                                if (jsonObjectx.getString("Answer").equals("Yes")) {
-                                    AcceptARematchRequest(jsonObjectx);
-                                }
-                            });
-
-                            case "ErrorCantRedirectTheMessage" -> Platform.runLater(()->showAlertAboutTheErrorAndResetTheApp());
-
-                            case "ErrorCantSendUpdateGameBoard" -> Platform.runLater(()->considerMeWonTheGameAndTerminateTheConnectionWithThisPlayer());
-                        }
-                    }catch(IOException e){
-                        e.printStackTrace();
-                        try {
-                            closeTheConnection();
-                        }catch (Exception ee){
-                            ee.printStackTrace();
-                        }
-                        // show an alert to make the user choose between close the app or go to the offline mode
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Warning!");
-                        alert.setHeaderText("The Server Is Down Try To Log In Later");
-                        alert.setContentText("Are Want to exit the game or switch to the offline mode ?");
-
-                        Button okButton = (Button) alert.getDialogPane().lookupButton( ButtonType.OK );
-                        okButton.setText("Offline");
-                        Button okButton2 = (Button) alert.getDialogPane().lookupButton( ButtonType.CANCEL );
-                        okButton2.setText("Exit");
-
-                        Optional<ButtonType> result2 = alert.showAndWait();
-                        if (result2.get() == ButtonType.OK){
-                            // ... user chose OK
-                            // switch the user to the playing options screen
-                            try{
-                                FXMLLoader loader = new FXMLLoader(TheMainClass.class.getResource("PlayingOption.fxml"));
-                                Parent mainCallWindowFXML = loader.load();
-                                TheMainClass.getMainStage().setTitle("Home !");
-                                TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,450,500));
-                                TheMainClass.getMainStage().show();
-                            }catch (Exception ee){
-                                ee.printStackTrace();
-                            }
-
-                        }else if(result2.get() == ButtonType.CANCEL){
-                            // exit the game
-                            // close the Stage
-                            Stage stage = (Stage) exitButton.getScene().getWindow();
-                            stage.close();
-                            closeTheConnection();
-                            thread.stop();
-                            System.exit(0);
-                            Platform.exit();
-                        }
-
-                        break;
-                    }
-                }
-            }
-        });
-
-        MainThread.start();
-        thread = new Thread(() -> {
-            String messageToTheServer = "{\"FunctionMode\" : \"getTheOnlinePlayersOnTheServerRequest\"" +
-                    " ,\"From\" : \"myIP\",\"To\" : \"opponentIP\" }";
-            while (true){
-                handler.getPs().println(messageToTheServer);
-                try {
-                    sleep(60000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-        thread.start();
 
         //ToDo Add An implementation for the record button
 
@@ -337,6 +202,11 @@ public class OnlineGameScreenController implements Initializable {
         rematchButton.setDisable(true);
         recordGameButton.setDisable(true);
         gamePanel.setDisable(true);
+
+
+        onlineGameScreenController = this;
+
+        classFlag = 1 ;
 
     }
 
@@ -382,10 +252,12 @@ public class OnlineGameScreenController implements Initializable {
 
             JSONObject object = array.getJSONObject(i);
             System.out.println(handler.getMyRealName());
+            System.out.println("We got Here");
+            System.out.println(object.getString("PlayerName"));
             if(!object.getString("PlayerName").equals(handler.getMyRealName())){
                 items.add(new RowData(object.getString("PlayerName"),object.getString("PlayerIP")));
+                System.out.println("we are in the if ");
             }
-
 
         }
 
@@ -580,6 +452,8 @@ public class OnlineGameScreenController implements Initializable {
     }
 
     // the function is ready for use
+
+    /*
     @FXML
     void goToProfilePage(MouseEvent event) {
 
@@ -599,6 +473,8 @@ public class OnlineGameScreenController implements Initializable {
 
 
     }
+
+     */
 
 
     // the function is ready for use
@@ -1083,9 +959,6 @@ public class OnlineGameScreenController implements Initializable {
 
     @FXML
     void getUserInfo(MouseEvent event) {
-        //ProfileController profileController=new ProfileController();
-        //profileController.setUserName(usernameLabel.getText().trim());
-        MainThread.stop();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileScreen.fxml"));
         try {
             Parent profileScreen = loader.load();
@@ -1098,8 +971,6 @@ public class OnlineGameScreenController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
     }
 
