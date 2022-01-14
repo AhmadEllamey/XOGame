@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class ViewRankController implements Initializable {
 
     static String dataFromServer;
-    private ClientHandler clientHandler;
+    //private ClientHandler clientHandler;
     String dataToSever;
 
 
@@ -31,9 +31,9 @@ public class ViewRankController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        clientHandler=ClientHandler.getClientHandler();
+        //clientHandler=ClientHandler.getClientHandler();
         dataToSever = "{\"FunctionMode\": \"" + "viewRank" + "\"}";
-        clientHandler.sendData(dataToSever);
+        //clientHandler.sendData(dataToSever);
         System.out.println(dataFromServer);
         //JSONObject result=new JSONObject(dataFromServer);
     }

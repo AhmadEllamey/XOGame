@@ -563,26 +563,7 @@ public class MainScreenController implements Initializable{
     void manageViewRecordsButton(ActionEvent event) {
 
     }
-    @FXML
-    void detUserInfo(MouseEvent event) {
-        ProfileController profileController=new ProfileController();
-        profileController.setUserName(usernameLabel.getText().trim());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileScreen.fxml"));
-        try {
-            Parent profileScreen = loader.load();
-            Stage stage=new Stage();
-            stage.setTitle("profile Screen");
-            stage.setScene(new Scene(profileScreen,450,500));
-            stage.show();
-            ProfileController.setStage(stage);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
 
 
 }

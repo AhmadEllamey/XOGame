@@ -1,9 +1,17 @@
 package com.example.xogame;
 
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,8 +22,11 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.json.*;
 
 public class LoginController implements Initializable {
@@ -38,118 +49,130 @@ public class LoginController implements Initializable {
     @FXML
     private Label PlayAsAGuestLabel;
 
-    public static Socket mySocket;
-    public static DataInputStream dis ;
-    public static PrintStream ps;
-    public static String MyName ;
-    public static String ToName ;
-    public static boolean MyIP ;
 
-
+    Handler handler ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        MyIP = false ;
-        ToName = null ;
-        try{
-            // ip in iti 123.321.2.2 - 123.321.2.4 - 123.321.2.3 - 123.321.2.0
-            // ip ---> 123.144.23.34
-            mySocket = new Socket("127.0.0.1", 5005);
-            dis = new DataInputStream(mySocket.getInputStream ());
-            ps = new PrintStream(mySocket.getOutputStream());
+        // ToDO Set On Close Action For The App .
 
-            new Thread(new Runnable() {
+        handler = Handler.getTheObject();
 
-                @Override
-                public void run() {
-                    ps.println("Please I need My Thread Name !");
-                    while(true){
-                        try{
-                            String str = dis.readLine();
-                            if(!MyIP){
-                                if(str != null){
-                                    MyName = str ;
-                                    MyIP = true ;
-                                }
-                            }else{
-                                System.out.println(str);
-                                JSONObject result = new JSONObject(str);
-                                String functionMode = result.getString("FunctionMode");
-                                System.out.println(functionMode);
-                                //System.out.println(message);
-                                if(functionMode != null ){
-                                    if(functionMode.equals("PassedTheLogIn")){
-                                        System.out.println("connection done successfully");
-                                    }
-                                }
-                            }
-                        }catch(IOException e){
-                            e.printStackTrace();
-                            closeTheConnection();
-                            Platform.exit();
-                            System.exit(0);
+        TheMainClass.getMainStage().getScene().getWindow().setOnCloseRequest(windowEvent -> {
 
-                        }
-                    }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Exit Confirmation !");
+            alert.setHeaderText("Warning , Are You Sure ?");
+            alert.setContentText("Are you Want To Exit The Application ?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+                // close the Stage
+                TheMainClass.getMainStage().close();
+                try{
+                    closeTheConnection();
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+                System.exit(0);
+                Platform.exit();
+            }else{
+                windowEvent.consume();
+            }
 
-            }).start();
+        });
 
-        }catch(IOException e){
-            //e.printStackTrace();
-            System.out.println("Server Is Down Or Something Went Wrong ! , try again later ...");
-            System.exit(0);
+
+    }
+
+
+    public void SwitchOnTheScreens(){
+
+        System.out.println("connection done successfully");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("OnlineGameScreen.fxml"));
+        try {
+            loader.load();
+            Parent popup = loader.getRoot();
+            TheMainClass.getMainStage().setTitle("XO Online Game !");
+            TheMainClass.getMainStage().setScene(new Scene(popup,800 ,600));
+            TheMainClass.getMainStage().show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
-
-
+    // This Method Is Done And Ready For Real Testing
     @FXML
     void manageCreateAccount(MouseEvent event) {
         System.out.println("Create Account");
+        // switch to the SignUpScreen
+        // go to playing options
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistrationScreen.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent popup = loader.getRoot();
+        TheMainClass.getMainStage().setTitle("Create New Account !");
+        TheMainClass.getMainStage().setScene(new Scene(popup,600 ,600));
+        TheMainClass.getMainStage().show();
     }
 
+    // This Method Is Done And Ready For Real Testing
     @FXML
     void manageForgotPassword(MouseEvent event) {
         System.out.println("Forgot password");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Password Recovery !");
+        alert.setHeaderText("What Should I Do If I forgot The Password ?");
+        alert.setContentText("Send To The Customer Support And They Will Help You.");
+        alert.show();
     }
 
+    // This Method Is Done And Ready For Real Testing
     @FXML
     void manageLoginButton(ActionEvent event) {
         System.out.println("Login Button");
         if(!UsernameText.getText().trim().isEmpty() && !PasswordText.getText().trim().isEmpty()){
-
             String MyString = "{\"FunctionMode\": \"loginRequest\", \"From\": \""
-                    +MyName+"\", \"To\": \""+ToName+
+                    +handler.getMyName()+"\", \"To\": \""+handler.getToName()+
                     "\", \"UserName\": \""+UsernameText.getText().trim()+"\" , \"Password\": \""+PasswordText.getText().trim()+"\" }";
-            //JSONObject json = new JSONObject(MyString);
-            ps.println(MyString);
-
+            handler.getPs().println(MyString);
         }
-
-
-
-
-
     }
 
-    public void closeTheConnection(){
-
-        try {
-            ps.close();
-            dis.close();
-            mySocket.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
+    // This Method Is Done And Ready For Real Testing
     @FXML
     void managePlayAsGuest(MouseEvent event) {
         System.out.println("Play as a guest");
+        // switch to the offlineScreen
+        // go to playing options
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayingOption.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent popup = loader.getRoot();
+        TheMainClass.getMainStage().setTitle("XO Offline Game !");
+        TheMainClass.getMainStage().setScene(new Scene(popup,600 ,400));
+        TheMainClass.getMainStage().show();
+
     }
 
+    // the function is ready for use
+    public void closeTheConnection(){
+        try {
+            handler.getPs().close();
+            handler.getDis().close();
+            handler.getMySocket().close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

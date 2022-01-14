@@ -30,7 +30,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../../software/json-20210307.jar!/" />
+          <root url="jar://C:/../software/json-20210307.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

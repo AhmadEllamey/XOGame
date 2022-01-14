@@ -11,6 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.DataInputStream;
@@ -26,16 +30,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable{
     private boolean updateSaveFlag;
     private static Stage stage ;
     private JSONObject result;
-    private ClientHandler clientHandler;
     private static String userName;
     private String userData;
-    private static String userDataFromServer;
+
 
     @FXML
     private ImageView imageView;
@@ -64,30 +68,131 @@ public class ProfileController implements Initializable{
     @FXML
     private Label viewRank;
 
-    public ProfileController() {
-        clientHandler=ClientHandler.getClientHandler();
+    Handler handler;
+
+
+    public boolean isJSONValid(String test) {
+        try {
+            new JSONObject(test);
+        }catch (Exception e){
+            try{
+                new JSONArray(test);
+                return false;
+            }catch (Exception ee){
+                System.out.println("error but return true");
+            }
+        }
+        return true;
+    }
+
+    // the function is ready for use
+    public void closeTheConnection(){
+        try {
+            handler.getPs().close();
+            handler.getDis().close();
+            handler.getMySocket().close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         updateSaveFlag = false;
+        handler = Handler.getHandler();
 
         //to get data from server when profile screen open
-        userData = "{\"FunctionMode\": \"getUserInfoRequest\",\"UserName\": \"" + "Mariam" + "\" ,\"From\": \"" + "M" + "\", \"To\": \"" + null + "\"}";
-        clientHandler.sendData(userData);
+        userData = "{\"FunctionMode\": \"getUserInfoRequest\",\"UserName\": \""+handler.getMyRealName()+"\" ,\"From\": \"" +handler.getMyName()+ "\", \"To\": \"" + null + "\"}";
+        handler.getPs().println(userData);
+        new Thread(() -> {
+            while(true){
+                try{
+                    String incomingLine = handler.getDis().readLine();
+                    System.out.println(incomingLine);
+                    JSONArray jsonArray ;
+                    JSONObject jsonObject ;
+                    String functionMode ;
+                    System.out.println(incomingLine);
+                    String x = "{" + incomingLine ;
 
-        //result=new JSONObject(userDataFromServer);
+                    if(isJSONValid(x)){
+                        jsonObject = new JSONObject(x);
+                        functionMode = jsonObject.getString("FunctionMode");
 
-        //set data into fields
-        /*userNameText.setText(result.getString("UserName"));
-        mailText.setText(result.getString("UserEmail"));
-        phoneTxt.setText(result.getString("UserPhone"));
-        passwordTxt.setText(result.getString("UserName"));
-        totalGameTxt.setText(result.getString("TotalGame"));
-        totalScoreTxt.setText(result.getString("TotalScore"));*/
+                    }else {
+                        jsonArray = new JSONArray(x);
+                        functionMode = jsonArray.getJSONObject(0).getString("FunctionMode");
+                    }
+                    System.out.println(functionMode);
+                    switch (functionMode) {
+                        case "getUserInfoRequest" -> Platform.runLater(()->{
+                            result=new JSONObject(x);
+                            //set data into fields
+                            userNameText.setText(result.getString("UserName"));
+                            mailText.setText(result.getString("UserEmail"));
+                            phoneTxt.setText(result.getString("UserPhone"));
+                            passwordTxt.setText(result.getString("UserName"));
+                            totalGameTxt.setText(result.getString("TotalGame"));
+                            totalScoreTxt.setText(result.getString("TotalScore"));
+                        });
 
-        userNameText.setText(userName);
+
+                        case "updateUserInfoRequest" -> Platform.runLater(()->{
+
+                        });
+
+
+                    }
+                }catch(IOException e){
+                    e.printStackTrace();
+                    try {
+                        closeTheConnection();
+                    }catch (Exception ee){
+                        ee.printStackTrace();
+                    }
+                    // show an alert to make the user choose between close the app or go to the offline mode
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Warning!");
+                    alert.setHeaderText("The Server Is Down Try To Log In Later");
+                    alert.setContentText("Are Want to exit the game or switch to the offline mode ?");
+
+                    Button okButton = (Button) alert.getDialogPane().lookupButton( ButtonType.OK );
+                    okButton.setText("Offline");
+                    Button okButton2 = (Button) alert.getDialogPane().lookupButton( ButtonType.CANCEL );
+                    okButton2.setText("Exit");
+
+                    Optional<ButtonType> result2 = alert.showAndWait();
+                    if (result2.get() == ButtonType.OK){
+                        // ... user chose OK
+                        // switch the user to the playing options screen
+                        try{
+                            FXMLLoader loader = new FXMLLoader(TheMainClass.class.getResource("PlayingOption.fxml"));
+                            Parent mainCallWindowFXML = loader.load();
+                            TheMainClass.getMainStage().setTitle("Home !");
+                            TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,450,500));
+                            TheMainClass.getMainStage().show();
+                        }catch (Exception ee){
+                            ee.printStackTrace();
+                        }
+
+                    }else if(result2.get() == ButtonType.CANCEL){
+                        // exit the game
+                        // close the Stage
+                        Stage stage = (Stage) updateBtn.getScene().getWindow();
+                        stage.close();
+                        closeTheConnection();
+                        System.exit(0);
+                        Platform.exit();
+                    }
+
+                    break;
+                }
+
+            }
+        }).start();
+
+
     }
 
     @FXML
@@ -107,8 +212,8 @@ public class ProfileController implements Initializable{
                 setTextFieldsDisable();
                 updateSaveFlag = false;
                 updateBtn.setText("Update");
-                //String userData = "{\"FunctionMode\": \"updateUserInfoRequest\",\"UserName\": \"" + userNameText.getText().trim() + "\", \"UserEmail\": \"" + mailText.getText().trim() + "\", \"UserPhone\": \"" + phoneTxt.getText().trim() + "\", \"Password\": \"" + passwordTxt.getText().trim() + "\"}";
-                //clientHandler.sendData(userData);
+                String userData = "{\"FunctionMode\": \"updateUserInfoRequest\",\"UserName\": \"" + userNameText.getText().trim() + "\", \"UserEmail\": \"" + mailText.getText().trim() + "\", \"UserPhone\": \"" + phoneTxt.getText().trim() + "\", \"Password\": \"" + passwordTxt.getText().trim() + "\"}";
+                handler.getPs().println(userData);
             }
         } else {
             setTextFieldsEnable();
@@ -121,6 +226,7 @@ public class ProfileController implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewRankScreen.fxml"));
         try {
             Parent root = loader.load();
+            //(Stage)updateBtn.getScene().getWindow()
             stage.setTitle("ViewRankScreen");
             stage.setScene(new Scene(root,450,470));
             stage.show();
@@ -175,7 +281,4 @@ public class ProfileController implements Initializable{
         this.userName=userName;
     }
 
-    public static void receiveDataFromServer(String str){
-        userDataFromServer=str;
-    }
 }
