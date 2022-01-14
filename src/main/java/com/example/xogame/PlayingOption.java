@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -58,6 +59,16 @@ public class PlayingOption implements Initializable {
 
     @FXML
     void playWithFriend(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayersNameScreen.fxml"));
+        try {
+            Parent profileScreen = loader.load();
+            Stage stage=new Stage();
+            stage.setScene(new Scene(profileScreen,510,285));
+            stage.show();
+            PlayersNameController.setStage(stage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

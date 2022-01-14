@@ -17,8 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.PlayWithFriendController">
+<AnchorPane prefHeight="400.0" prefWidth="545.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.PlayWithFriendController">
    <children>
       <ScrollPane layoutX="33.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -70,11 +69,20 @@
                            <children>
                               <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
                                  <children>
-                                    <Label text="Player1">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../user%20(2).png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="playerOneNameTxt" text="Player1">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                     <Label text="3">
                                        <padding>
                                           <Insets top="10.0" />
@@ -85,9 +93,9 @@
                                     </Label>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="54.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../friends.png" />
                                        </image>
@@ -99,11 +107,20 @@
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
                                  <children>
-                                    <Label text="Player2">
-                                       <font>
-                                          <Font size="25.0" />
-                                       </font>
-                                    </Label>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../user%20(2).png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="playerTowNameTxt" text="Player2">
+                                             <font>
+                                                <Font size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                     <Label text="6">
                                        <padding>
                                           <Insets top="10.0" />
