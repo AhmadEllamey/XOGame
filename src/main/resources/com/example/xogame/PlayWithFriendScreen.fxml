@@ -73,7 +73,9 @@
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../user%20(2).png" />
+                                                <Image>
+                                                   <url>@../../../user%20(2).png</url>
+                                                </Image>
                                              </image>
                                           </ImageView>
                                           <Label fx:id="playerOneNameTxt" text="Player1">
@@ -83,7 +85,7 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Label text="3">
+                                    <Label fx:id="playerOneScoreLabel" text="0">
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding>
@@ -111,7 +113,9 @@
                                        <children>
                                           <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../user%20(2).png" />
+                                                <Image>
+                                                   <url>@../../../user%20(2).png</url>
+                                                </Image>
                                              </image>
                                           </ImageView>
                                           <Label fx:id="playerTowNameTxt" text="Player2">
@@ -121,7 +125,7 @@
                                           </Label>
                                        </children>
                                     </HBox>
-                                    <Label text="6">
+                                    <Label fx:id="playerTwoScoreLabel" text="0">
                                        <padding>
                                           <Insets top="10.0" />
                                        </padding>

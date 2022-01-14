@@ -20,7 +20,7 @@ public class TheMainClass extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TheMainClass.class.getResource("PlayingOption.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("XO Game Login !");
         stage.setScene(scene);
         mainStage = stage ;

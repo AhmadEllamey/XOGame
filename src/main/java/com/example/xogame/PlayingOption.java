@@ -37,7 +37,7 @@ public class PlayingOption implements Initializable {
                 FXMLLoader loader = new FXMLLoader(TheMainClass.class.getResource("LoginScreen.fxml"));
                 Parent mainCallWindowFXML = loader.load();
                 TheMainClass.getMainStage().setTitle("Home !");
-                TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,450,500));
+                TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,650,400));
                 TheMainClass.getMainStage().show();
             }catch (Exception ee){
                 ee.printStackTrace();
