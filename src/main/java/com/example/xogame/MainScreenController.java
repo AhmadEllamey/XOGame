@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -563,15 +565,21 @@ public class MainScreenController implements Initializable{
     }
     @FXML
     void detUserInfo(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(TheMainClass.class.getResource("ProfileScreen.fxml"));
+        ProfileController profileController=new ProfileController();
+        profileController.setUserName(usernameLabel.getText().trim());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfileScreen.fxml"));
         try {
-            Parent mainCallWindowFXML = loader.load();
-            TheMainClass.getMainStage().setTitle("profile Screen !");
-            TheMainClass.getMainStage().setScene(new Scene(mainCallWindowFXML,450,500));
-            TheMainClass.getMainStage().show();
+            Parent profileScreen = loader.load();
+            Stage stage=new Stage();
+            stage.setTitle("profile Screen");
+            stage.setScene(new Scene(profileScreen,450,500));
+            stage.show();
+            ProfileController.setStage(stage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
 
     }

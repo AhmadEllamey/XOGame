@@ -35,6 +35,12 @@ public class ClientHandler {
                         String functionMode = jsonObject.getString("FunctionMode");
                         switch (functionMode){
                             //handle your case here
+                            case"getUserInfoRequest","updateUserInfoRequest":
+                                ProfileController.receiveDataFromServer(str);
+                                break;
+                            case"viewRank":
+                                ViewRankController.ListenToServerData(str);
+                                break;
 
                         }
                     } catch (IOException e) {

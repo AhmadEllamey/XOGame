@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.PlayWithFriendController">
+   <children>
+      <ScrollPane layoutX="33.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <BorderPane prefHeight="387.0" prefWidth="532.0">
+               <bottom>
+                  <FlowPane alignment="CENTER" prefHeight="78.0" prefWidth="532.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="72.0" prefWidth="307.0">
+                           <children>
+                              <JFXButton fx:id="SurrenderBtn" layoutX="10.0" layoutY="20.0" onMouseClicked="#manageSurrenderBtn" prefHeight="42.0" prefWidth="113.0" stylesheets="@application.css" text="Surrender">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="ReplayBtn" layoutX="133.0" layoutY="10.0" onMouseClicked="#manageReplayBtn" prefHeight="42.0" prefWidth="113.0" stylesheets="@application.css" text="Replay">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="ExitBtn" layoutX="123.0" layoutY="10.0" onMouseClicked="#manageExitBtn" prefHeight="42.0" prefWidth="113.0" stylesheets="@application.css" text="Exit">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </HBox>
+                     </children>
+                  </FlowPane>
+               </bottom>
+               <top>
+                  <FlowPane alignment="CENTER_LEFT" prefHeight="94.0" prefWidth="516.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox prefHeight="84.0" prefWidth="58.0">
+                           <children>
+                              <ImageView fx:id="backBtn" fitHeight="27.0" fitWidth="26.0" onMouseClicked="#manageBackBtn" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../back.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="84.0" prefWidth="377.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
+                                 <children>
+                                    <Label text="Player1">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="3">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../friends.png" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
+                                 <children>
+                                    <Label text="Player2">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="6">
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="26.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </FlowPane>
+               </top>
+               <left>
+                  <Pane prefHeight="248.0" prefWidth="130.0" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane prefHeight="248.0" prefWidth="130.0" BorderPane.alignment="CENTER" />
+               </right>
+               <center>
+                  <GridPane fx:id="gamePanel" alignment="CENTER" gridLinesVisible="true" maxHeight="500.0" maxWidth="300.0" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Pane fx:id="P_0_0" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" />
+                        <Pane fx:id="P_0_1" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <Pane fx:id="P_1_0" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                        <Pane fx:id="P_0_2" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                        <Pane fx:id="P_1_1" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Pane fx:id="P_1_2" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Pane fx:id="P_2_0" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                        <Pane fx:id="P_2_1" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Pane fx:id="P_2_2" onMouseClicked="#manageTheGameBoard" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </center>
+            </BorderPane>
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</AnchorPane>

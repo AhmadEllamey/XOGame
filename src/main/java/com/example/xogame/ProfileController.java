@@ -6,12 +6,18 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import org.json.JSONObject;
 
 import java.io.DataInputStream;
@@ -24,19 +30,21 @@ import java.util.ResourceBundle;
 
 public class ProfileController implements Initializable{
     private boolean updateSaveFlag;
-    private Socket socket;
-    private DataInputStream dataInputStream;
-    private PrintStream printStream;
+    private static Stage stage ;
     private JSONObject result;
+    private ClientHandler clientHandler;
+    private static String userName;
+    private String userData;
+    private static String userDataFromServer;
 
     @FXML
     private ImageView imageView;
 
     @FXML
-    private JFXTextField userNameText;
+    private JFXTextField mailText;
 
     @FXML
-    private JFXTextField mailText;
+    private JFXPasswordField passwordTxt;
 
     @FXML
     private JFXTextField phoneTxt;
@@ -48,53 +56,38 @@ public class ProfileController implements Initializable{
     private Label totalScoreTxt;
 
     @FXML
-    private JFXPasswordField passwordTxt;
-
-    @FXML
     private JFXButton updateBtn;
 
-    private void init() {
+    @FXML
+    private JFXTextField userNameText;
 
+    @FXML
+    private Label viewRank;
+
+    public ProfileController() {
+        clientHandler=ClientHandler.getClientHandler();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //init();
+
         updateSaveFlag = false;
-        userNameText.setText("Mariam Mostafa");
-        mailText.setText("MariamMostafa@gmail.com");
-        phoneTxt.setText("01020273870");
-        passwordTxt.setText("1234567");
-        try{
-            socket = new Socket("127.0.0.1", 5005);
-            dataInputStream = new DataInputStream(socket.getInputStream ());
-            printStream = new PrintStream(socket.getOutputStream());
-            new Thread(new Runnable() {
 
-                @Override
-                public void run() {
-                    while(true){
-                        try{
-                            String str = dataInputStream.readLine();
-                            result = new JSONObject(str);
+        //to get data from server when profile screen open
+        userData = "{\"FunctionMode\": \"getUserInfoRequest\",\"UserName\": \"" + "Mariam" + "\" ,\"From\": \"" + "M" + "\", \"To\": \"" + null + "\"}";
+        clientHandler.sendData(userData);
 
-                        }catch(IOException e){
-                            e.printStackTrace();
-                            closeConnection();
-                            Platform.exit();
-                            System.exit(0);
+        //result=new JSONObject(userDataFromServer);
 
-                        }
-                    }
-                }
+        //set data into fields
+        /*userNameText.setText(result.getString("UserName"));
+        mailText.setText(result.getString("UserEmail"));
+        phoneTxt.setText(result.getString("UserPhone"));
+        passwordTxt.setText(result.getString("UserName"));
+        totalGameTxt.setText(result.getString("TotalGame"));
+        totalScoreTxt.setText(result.getString("TotalScore"));*/
 
-            }).start();
-
-        }catch(IOException e){
-            //e.printStackTrace();
-            System.out.println("Server Is Down Or Something Went Wrong ! , try again later ...");
-            System.exit(0);
-        }
+        userNameText.setText(userName);
     }
 
     @FXML
@@ -109,13 +102,13 @@ public class ProfileController implements Initializable{
 
     @FXML
     void manageUpdateButton(ActionEvent event) {
-        if (updateSaveFlag == true) {
+         if (updateSaveFlag == true) {
             if(validateFields()==true) {
                 setTextFieldsDisable();
                 updateSaveFlag = false;
                 updateBtn.setText("Update");
-                String userData = "{\"FunctionMode\": \"updateUserInfoRequest\",\"UserName\": \"" + userNameText.getText().trim() + "\", \"UserEmail\": \"" + mailText.getText().trim() + "\", \"UserPhone\": \"" + phoneTxt.getText().trim() + "\", \"Password\": \"" + passwordTxt.getText().trim() + "\"}";
-                printStream.println(userData);
+                //String userData = "{\"FunctionMode\": \"updateUserInfoRequest\",\"UserName\": \"" + userNameText.getText().trim() + "\", \"UserEmail\": \"" + mailText.getText().trim() + "\", \"UserPhone\": \"" + phoneTxt.getText().trim() + "\", \"Password\": \"" + passwordTxt.getText().trim() + "\"}";
+                //clientHandler.sendData(userData);
             }
         } else {
             setTextFieldsEnable();
@@ -123,6 +116,20 @@ public class ProfileController implements Initializable{
             updateSaveFlag = true;
         }
     }
+    @FXML
+    void manageViewRank(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewRankScreen.fxml"));
+        try {
+            Parent root = loader.load();
+            stage.setTitle("ViewRankScreen");
+            stage.setScene(new Scene(root,450,470));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void setTextFieldsEnable(){
         userNameText.setDisable(false);
         imageView.setDisable(false);
@@ -157,17 +164,18 @@ public class ProfileController implements Initializable{
     public void getText(){
 
     }
-
-    public void closeConnection(){
-
-        try {
-            printStream.close();
-            dataInputStream.close();
-            socket.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
+    public static Stage getStage() {
+        return stage;
+    }
+    public static void setStage(Stage s) {
+        stage=s;
     }
 
+    public void setUserName(String userName){
+        this.userName=userName;
+    }
+
+    public static void receiveDataFromServer(String str){
+        userDataFromServer=str;
+    }
 }

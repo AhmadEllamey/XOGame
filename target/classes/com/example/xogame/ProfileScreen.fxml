@@ -10,20 +10,54 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="400.0" minHeight="-Infinity" minWidth="400.0" prefHeight="468.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.ProfileController">
+<AnchorPane maxHeight="-Infinity" maxWidth="508.0" minHeight="-Infinity" minWidth="362.0" prefHeight="470.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.ProfileController">
    <children>
       <ScrollPane cache="true" cacheHint="SCALE" fitToHeight="true" fitToWidth="true" layoutX="11.0" layoutY="10.0" prefHeight="450.0" prefWidth="378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <VBox alignment="TOP_CENTER" cache="true" cacheHint="SCALE" prefHeight="448.0" prefWidth="379.0">
                <children>
-                  <ImageView fx:id="imageView" cache="true" cacheHint="SCALE" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#manageImageView" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../imagex.png" />
-                     </image></ImageView>
+                  <BorderPane prefHeight="42.0" prefWidth="368.0">
+                     <left>
+                        <ImageView fx:id="imageView" cache="true" cacheHint="SCALE" fitHeight="95.0" fitWidth="123.0" onMouseClicked="#manageImageView" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@../../../imagex.png" />
+                           </image>
+                           <BorderPane.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </BorderPane.margin>
+                        </ImageView>
+                     </left>
+                     <right>
+                        <HBox alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="208.0" BorderPane.alignment="CENTER_LEFT">
+                           <children>
+                              <ImageView fitHeight="27.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Rank.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="viewRank" onMouseClicked="#manageViewRank" text="View Your Rank" underline="true">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" top="2.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </right>
+                  </BorderPane>
                   <HBox alignment="CENTER" cache="true" cacheHint="SCALE" prefHeight="43.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label cache="true" prefHeight="47.0" prefWidth="101.0" text="UserName">
