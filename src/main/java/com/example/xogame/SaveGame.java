@@ -7,9 +7,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class SaveGame {
-    public static boolean saveGame(ArrayList<String> sequence, ArrayList<String> turns, int gameNum, String opponent){
+    public static void main(String[] args) {
+        ArrayList<String> sequence = new ArrayList<>();
+        ArrayList<String> turns = new ArrayList<>();
+        sequence.add("b2");
+        sequence.add("b4");
+        sequence.add("b1");
+        turns.add("o");
+        turns.add("x");
+        turns.add("o");
+        String opponent = "mazen";
+        int gameNum = 15;
+
+        boolean s = saveGame(sequence, turns,opponent);
+        System.out.println(s);
+
+    }
+    public static boolean saveGame(ArrayList<String> sequence, ArrayList<String> turns, String opponent){
+
         boolean saved = false;
-        String path = ".\\" + opponent + "_" + String.valueOf(gameNum) + ".txt";
+        String path = "E:\\COURSES\\JAVA\\PROJECT\\TIC-TOE\\XOGame\\src\\main\\resources\\com\\" + opponent;
         File file = new File(path);
         ArrayList<String> lines = new ArrayList<>();
         FileWriter fileWriter = null;
@@ -28,7 +45,7 @@ public class SaveGame {
         while(it1.hasNext() && it2.hasNext()){
             String b = it1.next();
             String symbol = it2.next();
-            String move = b + ":" + symbol;
+            String move = b + "," + symbol;
             lines.add(move);
         }
 
