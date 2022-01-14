@@ -249,6 +249,8 @@ public class PlayWithFriendController implements Initializable {
         alert.setHeaderText("Are You Sure to go back and end game!");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
+            xCount=0;
+            oCount=0;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayingOption.fxml"));
             try {
                 Parent root = loader.load();
