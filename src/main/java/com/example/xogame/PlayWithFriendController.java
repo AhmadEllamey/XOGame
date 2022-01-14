@@ -244,14 +244,21 @@ public class PlayWithFriendController implements Initializable {
     }
     @FXML
     void manageBackBtn(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayingOption.fxml"));
-        try {
-            Parent root = loader.load();
-            TheMainClass.getMainStage().setScene(new Scene(root,450,470));
-            TheMainClass.getMainStage().show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Back Confirmation !");
+        alert.setHeaderText("Are You Sure to go back and end game!");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayingOption.fxml"));
+            try {
+                Parent root = loader.load();
+                TheMainClass.getMainStage().setScene(new Scene(root,450,470));
+                TheMainClass.getMainStage().show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
     }
 
@@ -292,7 +299,7 @@ public class PlayWithFriendController implements Initializable {
             playerName=playerTowNameTxt.getText().trim();
             flag=false;
         }
-        alert.setHeaderText("Are You Sure Player : "+playerName+" !");
+        alert.setHeaderText("Player : "+playerName+" !");
         alert.setContentText("Are You Sure About Surrender The Game ?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
@@ -306,9 +313,6 @@ public class PlayWithFriendController implements Initializable {
             playAgain();
             setScore();
         }
-
-
-
     }
 
     @FXML
