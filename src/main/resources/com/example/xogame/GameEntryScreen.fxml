@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.xogame.GameEntryController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="193.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -15,7 +16,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="playBtn" buttonType="RAISED" onAction="#goToGame" prefWidth="300.0" ripplerFill="#b5adad" stylesheets="@application.css" text="Play Game" textAlignment="CENTER">
+                        <JFXButton fx:id="playBtn" buttonType="RAISED" onAction="#goToGame" prefWidth="300.0" ripplerFill="#b5adad" text="Play Game" textAlignment="CENTER">
                            <font>
                               <Font name="Comic Sans MS" size="31.0" />
                            </font>
@@ -24,7 +25,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <JFXButton fx:id="myGamesBtn" buttonType="RAISED" onAction="#viewMyGames" prefWidth="300.0" ripplerFill="#b5adad" stylesheets="@application.css" text="my games" textAlignment="CENTER">
+                        <JFXButton fx:id="myGamesBtn" buttonType="RAISED" onAction="#viewMyGames" prefWidth="300.0" ripplerFill="#b5adad" text="my games" textAlignment="CENTER">
                            <font>
                               <Font name="Comic Sans MS" size="31.0" />
                            </font>
